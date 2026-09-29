@@ -1,0 +1,15 @@
+# SwiftPM / Xcode build output
+.build/
+build/
+.swiftpm/
+DerivedData/
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+
+# macOS
+.DS_Store
+
+# Local test audio
+*.wav
+*.aiff
