@@ -159,19 +159,7 @@ Making prompts work required working around two issues in WhisperKit, found whil
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    K[HotkeyMonitor<br/>right ⌥ / ⇧] --> A[AudioRecorder<br/>16 kHz mono]
-    A --> S[StreamingSession<br/>LocalAgreement + deferred punctuation]
-    S <--> T[Transcriber<br/>WhisperKit · Core ML / Neural Engine]
-    S -->|committed words| Y[Typer<br/>Unicode keystrokes]
-    S -->|live caption| H[RecordingHUD]
-    A -->|on release| F[Full-recording pass]
-    F --> P{Prompt mode?}
-    P -->|no| V[Paster<br/>clipboard + ⌘V, restored]
-    P -->|yes| R[PromptRewriter<br/>Groq · streamed]
-    R --> V
-```
+<img src="docs/images/architecture.svg" alt="Architecture: the hotkey starts the recorder; while you speak, the streaming session re-transcribes audio with WhisperKit and sends committed words to the typer and the live caption to the HUD; on release, a full-recording pass goes either straight to the paster or through the prompt rewriter" width="900">
 
 | Module | Responsibility |
 |---|---|
